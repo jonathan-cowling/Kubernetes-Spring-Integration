@@ -9,6 +9,7 @@ ENV RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbit.conf
 EXPOSE 15672
 EXPOSE 5672
 
-RUN rabbitmq-server &
-
-RUN rabbitmqadmin declare queue -u "guest" -p "guest" --vhost="/" name="/testQ" durable=true
+CMD ( rabbitmq-server ) & (
+  sleep 1
+  rabbitmqadmin declare queue -u "guest" -p "guest" --vhost="/" name="/testQ" durable=true
+)

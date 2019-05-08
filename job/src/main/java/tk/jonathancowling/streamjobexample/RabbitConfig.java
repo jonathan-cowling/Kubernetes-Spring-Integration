@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.amqp.inbound.AmqpInboundChannelAdapter;
 import org.springframework.integration.amqp.inbound.AmqpInboundGateway;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
@@ -20,25 +21,24 @@ import java.util.logging.Logger;
 @Configuration
 public class RabbitConfig {
 
-    final CountDownLatch lock;
-
-    @Autowired
-    public RabbitConfig(CountDownLatch lock) {
-        this.lock = lock;
-    }
-
     @Bean
     public MessageChannel amqpInputChannel() {
         return new DirectChannel();
     }
 
     @Bean
-    public AmqpInboundGateway inbound(SimpleMessageListenerContainer listenerContainer,
-                                      @Qualifier("amqpInputChannel") MessageChannel channel) {
-        AmqpInboundGateway gateway = new AmqpInboundGateway(listenerContainer);
-        gateway.setRequestChannel(channel);
-        gateway.setDefaultReplyTo("bar");
-        return gateway;
+    public MessageChannel amqpErrorChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public AmqpInboundChannelAdapter inbound(SimpleMessageListenerContainer listenerContainer,
+                                      @Qualifier("amqpInputChannel") MessageChannel channel//,
+                                      // @Qualifier("amqpErrorChannel") MessageChannel errChannel
+    ) {
+        AmqpInboundChannelAdapter adapter = new AmqpInboundChannelAdapter(listenerContainer);
+        adapter.setOutputChannel(channel);
+        return adapter;
     }
 
     @Bean
@@ -49,18 +49,19 @@ public class RabbitConfig {
         return container;
     }
 
-    @Bean
-    @ServiceActivator(inputChannel = "amqpInputChannel")
-    public MessageHandler handler() {
-        return new AbstractReplyProducingMessageHandler() {
-
-            @Override
-            protected Object handleRequestMessage(Message<?> requestMessage) {
-                Logger.getGlobal().info("reply to " + requestMessage.getPayload());
-                lock.countDown();
-                return "reply to " + requestMessage.getPayload();
-            }
-
-        };
-    }
+//    old (non dsl) way of getting input from the channel
+//    @Bean
+//    @ServiceActivator(inputChannel = "amqpInputChannel")
+//    public MessageHandler handler() {
+//        return new AbstractReplyProducingMessageHandler() {
+//
+//            @Override
+//            protected Object handleRequestMessage(Message<?> requestMessage) {
+//                Logger.getGlobal().info("reply to " + requestMessage.getPayload());
+//                lock.countDown();
+//                return "reply to " + requestMessage.getPayload();
+//            }
+//
+//        };
+//    }
 }

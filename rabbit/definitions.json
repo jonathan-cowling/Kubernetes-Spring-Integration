@@ -1,0 +1,39 @@
+{
+  "queues": [
+    {
+      "name": "in",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "err",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "b+WleDBFO9kz35+Y05igm/Vg/TkHdFbXTtvaufD+ky/H7p04",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ]
+}

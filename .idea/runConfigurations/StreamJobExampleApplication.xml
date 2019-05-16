@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="StreamJobExampleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="job_main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="tk.jonathancowling.streamjobexample.StreamJobExampleApplication" />
+    <option name="DEBUG_MODE" value="true" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

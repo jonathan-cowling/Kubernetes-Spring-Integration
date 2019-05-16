@@ -34,16 +34,6 @@ public class RabbitConfig {
     // https://docs.spring.io/spring-integration/reference/html/
 
     @Bean
-    SimpleMessageListenerContainer errContainer(ConnectionFactory connectionFactory,
-                                                AmqpOutboundEndpoint outboundEndpoint) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames("err");
-        container.setMessageListener(new MessageListenerAdapter());
-        return container;
-    }
-
-    @Bean
     public MessageChannel amqpInputChannel() {
         return new DirectChannel();
     }
@@ -69,16 +59,6 @@ public class RabbitConfig {
         container.setQueueNames("in");
         container.setConcurrentConsumers(1);
         return container;
-    }
-
-    @Bean
-    @ServiceActivator(inputChannel = "amqpErrorChannel")
-    public AmqpOutboundEndpoint outbound(AmqpTemplate template, TopicExchange topicExchange) {
-
-        AmqpOutboundEndpoint endpoint = new AmqpOutboundEndpoint(template);
-        endpoint.setExchangeName(topicExchange.getName());
-        endpoint.setRoutingKey("key");
-        return endpoint;
     }
 
     @Bean

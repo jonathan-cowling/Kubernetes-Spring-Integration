@@ -1,6 +1,7 @@
 package tk.jonathancowling.streamjobexample;
 
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,28 +30,27 @@ public class Flow {
 
     @Bean
     IntegrationFlow mainFlow() {
-        return IntegrationFlows.from("amqpInputChannel"
-               /* Amqp.inboundAdapter(connectionFactory, new Queue("in"))
-                        .errorChannel(Amqp.channel("err", connectionFactory).get())*/
+        return IntegrationFlows.from(Amqp
+                .inboundAdapter(connectionFactory, new Queue("in"))
+                .errorChannel("amqpErrorChannel")
         )
-                .aggregate(/*a -> a.correlationStrategy(obj -> 0).releaseStrategy(obj -> obj.size() >= 3)*/)
+                .aggregate(a -> a.correlationStrategy(obj -> 0).releaseStrategy(obj -> obj.size() >= 3))
                 .convert(List.class)
                 .log(LoggingHandler.Level.INFO)
                 .<List<String>>handle((payload, headers) -> {
                     lock.countDown();
-                    return null; // if null channel not needed
+                    return null; // null means stop message propagation
                 })
-                .channel("nullChannel")
                 .get();
     }
 
-//    @Bean
-//    IntegrationFlow errorFlow() {
-//        return IntegrationFlows.from("amqpErrorChannel")
-//                .handle(Amqp
-//                        .outboundAdapter(template)
-//                        .exchangeName("errTopic")
-//                        .routingKey("key"))
-//                .get();
-//    }
+    @Bean
+    IntegrationFlow errorFlow() {
+        return IntegrationFlows.from("amqpErrorChannel")
+                .handle(Amqp
+                        .outboundAdapter(template)
+                        .exchangeName("errTopic")
+                        .routingKey("key"))
+                .get();
+    }
 }

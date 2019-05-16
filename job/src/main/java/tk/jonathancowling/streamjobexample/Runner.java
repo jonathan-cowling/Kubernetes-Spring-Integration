@@ -1,10 +1,8 @@
 package tk.jonathancowling.streamjobexample;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
@@ -12,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 @Component
-public class Runner implements CommandLineRunner {
+public class Runner {
 
     private final CountDownLatch lock;
 
@@ -24,8 +22,7 @@ public class Runner implements CommandLineRunner {
         this.ctx = ctx;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    void run(String... args) throws Exception {
         Logger.getGlobal().info(String.format("Hello World (%d)", lock.getCount()));
         lock.await(1, TimeUnit.MINUTES);
         Logger.getGlobal().info("FINISHED");

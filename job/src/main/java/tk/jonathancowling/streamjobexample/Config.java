@@ -21,6 +21,9 @@ public class Config {
     @Value("${job.queue.in}")
     private String inQueueName;
 
+    @Value("${job.queue.err}")
+    private String errQueueName;
+
     @Value("${job.exchange.name}")
     private String outExchangeName;
 
@@ -43,11 +46,9 @@ public class Config {
         DeclareOk declare = Objects
                 .requireNonNull(template.execute(channel -> channel.queueDeclarePassive(inQueueName)));
 
-        Objects.requireNonNull(template.execute(channel -> channel.exchangeDeclarePassive(outExchangeName)));
+        Objects.requireNonNull(template.execute(channel -> channel.queueDeclarePassive(errQueueName)));
 
-        Objects.requireNonNull(
-                template.execute(channel -> channel.queueBind(inQueueName, outExchangeName, outExchangeKey))
-        );
+        Objects.requireNonNull(template.execute(channel -> channel.exchangeDeclarePassive(outExchangeName)));
 
         messagesToProcess = declare.getMessageCount();
         in = new Queue(inQueueName);

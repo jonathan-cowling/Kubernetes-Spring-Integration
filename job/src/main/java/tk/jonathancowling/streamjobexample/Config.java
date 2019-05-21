@@ -1,6 +1,7 @@
 package tk.jonathancowling.streamjobexample;
 
 import com.rabbitmq.client.AMQP.Queue.DeclareOk;
+import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,6 @@ public class Config {
     @Value("${job.queue.in}")
     private String inQueueName;
 
-    @Value("${job.queue.err}")
-    private String errQueueName;
-
     @Value("${job.exchange.name}")
     private String outExchangeName;
 
@@ -42,13 +40,12 @@ public class Config {
     void init() {
 
         // source: https://stackoverflow.com/questions/11446443/queue-size-in-spring-amqp-java-client
-
         DeclareOk declare = Objects
                 .requireNonNull(template.execute(channel -> channel.queueDeclarePassive(inQueueName)));
 
-        Objects.requireNonNull(template.execute(channel -> channel.queueDeclarePassive(errQueueName)));
-
-        Objects.requireNonNull(template.execute(channel -> channel.exchangeDeclarePassive(outExchangeName)));
+        if (!outExchangeName.isEmpty()) {
+            Objects.requireNonNull(template.execute(channel -> channel.exchangeDeclarePassive(outExchangeName)));
+        }
 
         messagesToProcess = declare.getMessageCount();
         in = new Queue(inQueueName);

@@ -15,31 +15,10 @@
       "arguments": {}
     }
   ],
-  "exchanges": [
-    {
-      "name": "errTopic",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    }
-  ],
-  "bindings": [
-    {
-      "source": "errTopic",
-      "vhost": "/",
-      "destination": "err",
-      "destination_type": "queue",
-      "routing_key": "key",
-      "arguments": {}
-    }
-  ],
   "users": [
     {
-      "name": "admin",
-      "password_hash": "b+WleDBFO9kz35+Y05igm/Vg/TkHdFbXTtvaufD+ky/H7p04",
+      "name": "guest",
+      "password_hash": "v0dtipO360QgUlhOrFKcc8Q5gW+qVdgcEhI0ks8yqi74HQAD",
       "tags": "administrator"
     }
   ],
@@ -50,7 +29,7 @@
   ],
   "permissions": [
     {
-      "user": "admin",
+      "user": "guest",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",

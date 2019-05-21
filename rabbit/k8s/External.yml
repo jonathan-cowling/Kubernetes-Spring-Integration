@@ -12,3 +12,9 @@ spec:
     port: 30000
     nodePort: 30000
     targetPort: 15672
+#    Uncomment to expose rabbitmq amqp port
+#  - protocol: TCP
+#    name: management
+#    port: 30001
+#    nodePort: 30001
+#    targetPort: 5672

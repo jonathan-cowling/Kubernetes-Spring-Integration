@@ -1,7 +1,6 @@
 package tk.jonathancowling.streamjobexample;
 
 import com.rabbitmq.client.AMQP.Queue.DeclareOk;
-import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

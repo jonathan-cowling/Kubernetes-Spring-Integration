@@ -17,7 +17,6 @@ import org.springframework.messaging.MessageChannel;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 @Configuration

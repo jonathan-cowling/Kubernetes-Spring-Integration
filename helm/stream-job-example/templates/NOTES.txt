@@ -1,0 +1,5 @@
+Options:
+  - rabbit.expose.management=[<HOST_MANAGEMENT_PORT>] # default null
+  - rabbit.expose.amqp=[<HOST_AMQP_PORT>] # default null
+  - job.oneShot=[true|false] # default true
+  - job.schedule=[<CRONTAB_STRING>] # required if oneShot is false

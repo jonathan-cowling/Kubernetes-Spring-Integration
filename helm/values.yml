@@ -1,0 +1,6 @@
+rabbit:
+  expose:
+    management: 30000
+job:
+  oneShot: false
+  schedule: "* * 31 2 ?"

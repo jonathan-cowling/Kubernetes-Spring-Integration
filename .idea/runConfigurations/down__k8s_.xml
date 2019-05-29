@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="down (k8s)" type="BashConfigurationType" factoryName="Bash">
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="INTERPRETER_PATH" value="" />
+    <option name="PROJECT_INTERPRETER" value="true" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="scripts/k8s-down.sh" />
+    <option name="PARAMETERS" value="" />
+    <module name="" />
+    <method v="2" />
+  </configuration>
+</component>

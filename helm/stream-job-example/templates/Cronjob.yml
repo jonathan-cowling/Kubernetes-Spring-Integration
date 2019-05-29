@@ -1,0 +1,19 @@
+{{- if not .Values.job.oneShot -}}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: spring
+spec:
+  schedule: {{ required "if a job isn't one off it must have a schedule" .Values.job.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: job
+            image: streamjobexample:local
+{{- end }}

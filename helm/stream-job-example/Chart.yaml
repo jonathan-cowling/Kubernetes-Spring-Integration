@@ -1,0 +1,19 @@
+apiVersion: v1
+name: stream-job-example
+version: 1.0.0
+kubeVersion: "^1.10"
+description: A spring integration job that reads and writes to rabbitmq
+keywords:
+- spring
+- spring-integration
+- rabbitmq
+- example
+home: https://github.com/jonathan-cowling/Kubernetes-Spring-Integration.git
+sources:
+- https://github.com/jonathan-cowling/Kubernetes-Spring-Integration.git
+maintainers:
+- name: Jonathan Cowling
+engine: gotpl
+appVersion: 1.0.0
+deprecated: false
+tillerVersion: "^2.0.0"

@@ -1,0 +1,29 @@
+{{- if .Values.rabbit.expose -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbit-external
+spec:
+  selector:
+    app: rabbit
+  type: NodePort
+  ports:
+  {{- range $index, $value := .Values.rabbit.expose }}
+  {{- if eq $index "management" }}
+  - protocol: TCP
+    name: management
+    port: {{ $value }}
+    nodePort: {{ $value }}
+    targetPort: 15672
+  {{- end}}
+  {{- if eq $index "amqp" }}
+  - protocol: TCP
+    name: management
+    port: {{ $value }}
+    nodePort: {{ $value }}
+    targetPort: 5672
+  {{- end }}
+  {{- else -}}
+    []
+  {{- end }}
+{{- end }}

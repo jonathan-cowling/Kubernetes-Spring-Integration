@@ -1,0 +1,34 @@
+metadata: {}
+certificates: {}
+settings:
+  kubeContext: docker-for-desktop
+  storageBackend: configMap # secret should be used for prod due to added security
+#  slackWebhook: https://url.for.webhook.slack.com
+namespaces:
+  dev:
+    protected: false
+    installTiller: false # true if wanting to use a pre installed tiller
+    limits:
+    - type: Container
+      default:
+        cpu: "300m" # will throttle if more than 0.3 cores used  (since cpu is compressible)
+        memory: "200Mi" # terminated if exceeded (since memory is not compressible)
+      defaultRequest:
+        cpu: "200m" # will schedule if there's 0.2 cores free
+        memory: "100Mi" # will schedule if there's 100 me
+    - type: Pod
+      max:
+        memory: "300Mi" # Mi is mebibyte (power of 2), M is megabyte (power of 10)
+helmRepos: {}
+apps:
+  stream-job-example:
+    namespace: dev
+    enabled: true
+    chart: ../helm/stream-job-example
+    version: 1.0.0
+    name: stream-job-example
+    description: a Spring Integration Kubernetes Job
+    valuesFile: ../helm/values.yml
+    wait: true
+    purge: false
+    timeout: 30

@@ -2,3 +2,4 @@ rabbit:
   expose: {}
 job:
   oneShot: true
+hook: true

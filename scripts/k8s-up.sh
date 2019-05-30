@@ -2,4 +2,4 @@
 
 set -e -u
 
-for f in */k8s/*.yml; do cat "${f}"; echo -e "\n---"; done | kubectl apply -f -
+for f in kubernetes/*.yml; do cat "${f}"; echo -e "\n---"; done | kubectl apply -f -

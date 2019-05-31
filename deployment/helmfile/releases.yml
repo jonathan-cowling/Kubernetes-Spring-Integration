@@ -1,0 +1,12 @@
+helmDefaults:
+  verify: true
+  wait: true
+  timeout: 30
+releases:
+- name: stream-job-example
+  verify: false # unpackaged charts cannot be verified
+  namespace: dev
+  chart: "../helm/stream-job-example"
+  version: 1.0.0
+  values:
+  - "../helm/values.yml"

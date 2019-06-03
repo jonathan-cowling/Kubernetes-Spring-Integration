@@ -30,5 +30,5 @@ apps:
     description: a Spring Integration Kubernetes Job
     valuesFile: ../helm/values.yml
     wait: true
-    purge: false
+    purge: true
     timeout: 30

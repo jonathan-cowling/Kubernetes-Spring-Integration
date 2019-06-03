@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="up (helm)" type="BashConfigurationType" factoryName="Bash" singleton="true">
+  <configuration default="false" name="up (kubernetes)" type="BashConfigurationType" factoryName="Bash" singleton="true">
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="INTERPRETER_PATH" value="" />
     <option name="PROJECT_INTERPRETER" value="true" />
     <option name="WORKING_DIRECTORY" value="" />
     <option name="PARENT_ENVS" value="true" />
-    <option name="SCRIPT_NAME" value="deployment/helm/up.sh" />
+    <option name="SCRIPT_NAME" value="deployment/kubernetes/up.sh" />
     <option name="PARAMETERS" value="" />
     <module name="" />
     <method v="2">

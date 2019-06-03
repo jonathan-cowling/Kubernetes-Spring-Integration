@@ -1,15 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="up (k8s)" type="BashConfigurationType" factoryName="Bash">
+  <configuration default="false" name="up (helmsman)" type="BashConfigurationType" factoryName="Bash" singleton="true">
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="INTERPRETER_PATH" value="" />
     <option name="PROJECT_INTERPRETER" value="true" />
     <option name="WORKING_DIRECTORY" value="" />
     <option name="PARENT_ENVS" value="true" />
-    <option name="SCRIPT_NAME" value="scripts/k8s-up.sh" />
+    <option name="SCRIPT_NAME" value="deployment/helmsman/up.sh" />
     <option name="PARAMETERS" value="" />
     <module name="" />
-    <method v="2">
-      <option name="RunConfigurationTask" enabled="true" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>

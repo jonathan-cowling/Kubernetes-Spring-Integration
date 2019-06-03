@@ -2,5 +2,5 @@
 
 set -e -u
 
-cd helm
+cd deployment/helm
 helm install stream-job-example --name stream-job-example --values values.yml

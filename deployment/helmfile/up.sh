@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-helmfile -f releases.yml apply
+set -u -e
+cd deployment/helmfile
+
+helmfile -f releases.yml sync

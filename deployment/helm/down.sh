@@ -2,5 +2,5 @@
 
 set -e -u
 
-cd helm
+cd deployment/helm
 helm delete --purge stream-job-example

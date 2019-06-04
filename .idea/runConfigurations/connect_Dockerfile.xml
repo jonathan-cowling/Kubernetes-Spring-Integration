@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="rabbit/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+  <configuration default="false" name="connect/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
         <option name="JSONFilePath" value="" />
@@ -8,8 +8,8 @@
         <option name="commandLineOptions" value="" />
         <option name="containerName" value="" />
         <option name="entrypoint" value="" />
-        <option name="imageTag" value="rabbit:local" />
-        <option name="sourceFilePath" value="rabbit/Dockerfile" />
+        <option name="imageTag" value="rabbit-connect:local" />
+        <option name="sourceFilePath" value="rabbit/connect/Dockerfile" />
         <option name="startBrowserSettings">
           <browser url="http://127.0.0.1" />
         </option>

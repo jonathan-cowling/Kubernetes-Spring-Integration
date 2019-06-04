@@ -9,6 +9,14 @@ default on `localhost:30000`).
 Messages consisting solely of the word `error` (any case) will be sent to the error
 queue.
 
+## Quickstart
+
+1. `./gradlew package` to package the application into a jar file
+2. `./deployment/docker/images.sh` to create docker images to deploy
+3. `./deployment/kubernetes/up.sh` to create the job and services it's dependent on
+4. visit `http://localhost:30000` and login with username `admin`, password `admin`
+5. navigate to the queue called `in`, any messages here will be
+
 ## Deployment
 
 The application can be deployed as a job with multiple tools (each separate

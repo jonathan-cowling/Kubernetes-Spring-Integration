@@ -12,6 +12,35 @@ spec:
       template:
         spec:
           restartPolicy: Never
+          initContainers:
+          - name: rabbit-connect
+            image: rabbit-connect:local
+            env:
+            - name: K_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: RABBIT_HOST
+              value: "rabbit-internal.$(K_NAMESPACE).svc.cluster.local"
+            - name: RABBIT_PORT
+              value: "5672"
+            - name: RABBIT_USERNAME
+              value: guest
+            - name: RABBIT_PASSWORD
+              value: guest
           containers:
           - name: job
             image: streamjobexample:local
+            env:
+            - name: K_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: RABBIT_HOST
+              value: "rabbit-internal.$(K_NAMESPACE).svc.cluster.local"
+            - name: RABBIT_PORT
+              value: "5672"
+            - name: RABBIT_USERNAME
+              value: guest
+            - name: RABBIT_PASSWORD
+              value: guest
